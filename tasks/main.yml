@@ -1,12 +1,13 @@
 ---
+- name: Update apt cache
+  apt: update_cache=true
 - name: Install packages from apt
-  apt: 
-    pkg: 
-    - git 
-    - vim
-    - tmux
-    - ripgrep
-    update_cache: true
+  package:
+    name:
+      - git
+      - vim
+      - tmux
+      - ripgrep
     state: present
   become: true
 - name: Install fd debian package
@@ -18,7 +19,7 @@
     repo: https://github.com/junegunn/fzf
     depth: 1
     dest: ~/.fzf
-- name: Install fzf 
+- name: Install fzf
   command: ~/.fzf/install --all
 - name: Clone .dotpliki repositorium
   git:
@@ -26,13 +27,13 @@
     dest: "~/.dotpliki"
     bare: true
 - name: Install z
-  git: 
+  git:
     repo: https://github.com/rupa/z
     dest: ~/.local/share/z
 
 - name: Install Vundle
-  git: 
-    repo: https://github.com/VundleVim/Vundle.vim.git 
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
     dest: ~/.vim/bundle/Vundle.vim
 
 - name: Checkout .dotpliki repositorium
