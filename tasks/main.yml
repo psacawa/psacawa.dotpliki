@@ -1,14 +1,18 @@
 ---
 - name: Update apt cache
   apt: update_cache=true
+  become: true
 - name: Install packages from apt
   package:
     name:
       - git
       - vim
       - tmux
-      - ripgrep
     state: present
+  become: true
+- name: Install ripgrep from .deb
+  apt:
+    deb: "{{ rg_deb_url }}"
   become: true
 - name: Install fd debian package
   apt:
