@@ -23,8 +23,10 @@
     repo: https://github.com/junegunn/fzf
     depth: 1
     dest: ~/.fzf
+  register: fzf_download_result
 - name: Install fzf
   command: ~/.fzf/install --all
+  when: fzf_download_result.changed == true
 - name: Clone .dotpliki repositorium
   git:
     repo: https://github.com/psacawa/.dotpliki
@@ -34,12 +36,10 @@
   git:
     repo: https://github.com/rupa/z
     dest: ~/.local/share/z
-
 - name: Install Vundle
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
     dest: ~/.vim/bundle/Vundle.vim
-
 - name: Checkout .dotpliki repositorium
   shell: git --git-dir=$HOME/.dotpliki --work-tree=$HOME checkout -f
   register: dotpliki_checkout_result
