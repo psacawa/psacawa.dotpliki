@@ -10,6 +10,7 @@
       - tmux
       - tree
       - htop
+      - httpie
       - jq
     state: present
   become: true
