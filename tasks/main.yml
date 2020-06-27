@@ -12,6 +12,7 @@
       - htop
       - httpie
       - jq
+      - ipython3
     state: present
   become: true
 - name: Install ripgrep from .deb
