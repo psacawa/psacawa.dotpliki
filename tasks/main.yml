@@ -37,6 +37,7 @@
     repo: https://github.com/psacawa/.dotpliki
     dest: "~/.dotpliki"
     bare: true
+  register: git_dotpliki_clone_result
 - name: Install z
   git:
     repo: https://github.com/rupa/z
@@ -47,4 +48,5 @@
     dest: ~/.vim/bundle/Vundle.vim
 - name: Checkout .dotpliki repositorium
   shell: git --git-dir=$HOME/.dotpliki --work-tree=$HOME checkout -f
+  when: git_dotpliki_clone_result.changed
   register: dotpliki_checkout_result
