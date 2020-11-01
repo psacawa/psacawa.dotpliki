@@ -13,15 +13,9 @@
       - httpie
       - jq
       - ipython3
+      - ripgrep
+      - fd-find
     state: present
-  become: true
-- name: Install ripgrep from .deb
-  apt:
-    deb: "{{ rg_deb_url }}"
-  become: true
-- name: Install fd debian package
-  apt:
-    deb: "{{ fd_deb_url }}"
   become: true
 - name: Download fzf
   git:
@@ -38,15 +32,11 @@
     dest: "~/.dotpliki"
     bare: true
   register: git_dotpliki_clone_result
-- name: Install z
-  git:
-    repo: https://github.com/rupa/z
-    dest: ~/.local/share/z
-- name: Install Vundle
-  git:
-    repo: https://github.com/VundleVim/Vundle.vim.git
-    dest: ~/.vim/bundle/Vundle.vim
 - name: Checkout .dotpliki repositorium
   shell: git --git-dir=$HOME/.dotpliki --work-tree=$HOME checkout -f
   when: git_dotpliki_clone_result.changed
   register: dotpliki_checkout_result
+- name: Install z
+  git:
+    repo: https://github.com/rupa/z
+    dest: ~/.local/share/z
